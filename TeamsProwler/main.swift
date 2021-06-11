@@ -22,17 +22,26 @@ print("How many versions ahead do you want to scan for?")
 guard let versionsAhead = readLine() else { exit(3) }
 
 baseUrl = "https://statics.teams.microsoft.com/production-osx/" + majorVersion + "."
+let sema = DispatchSemaphore(value: 0)
+var versionArray: [String] = []
 
 let intBuild = Int(buildNumber)
 let intVersions = Int(versionsAhead)
     if let intBuild = intBuild, let intVersions = intVersions {
         for n in intBuild...(intBuild + intVersions) {
             let currentUrl = URL(string: baseUrl + String(n) + "/Teams_osx.pkg")!
-            print(currentUrl)
             currentUrl.isReachable { success in
                 if success {
-                    print("Version " + majorVersion + "." + String(n) + "exists!")
+                    versionArray.append(String(n))
+                    print("Version " + majorVersion + "." + String(n) + " exists!")
                 }
+            }
+            sema.wait()
+        }
+        if versionArray.count > 0 {
+            let downloadURL = URL(string: baseUrl + (versionArray.last!) + "/Teams_osx.pkg")!
+            FileDownloader.loadFileSync(url: downloadURL) { (path, error) in
+                print("Teams version " + majorVersion + "." + versionArray.last! + " was downloaded correctly!")
             }
         }
     }
@@ -43,6 +52,9 @@ extension URL {
         request.httpMethod = "HEAD"
         URLSession.shared.dataTask(with: request) { _, response, _ in
             completion((response as? HTTPURLResponse)?.statusCode == 200)
+            sema.signal()
         }.resume()
     }
 }
+
+
