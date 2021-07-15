@@ -24,27 +24,29 @@ guard let versionsAhead = readLine() else { exit(3) }
 baseUrl = "https://statics.teams.microsoft.com/production-osx/" + majorVersion + "."
 let sema = DispatchSemaphore(value: 0)
 var versionArray: [String] = []
-
+var versionsToCheck: [String] = []
+var existingVersions: [String] = []
 let intBuild = Int(buildNumber)
 let intVersions = Int(versionsAhead)
-    if let intBuild = intBuild, let intVersions = intVersions {
-        for n in intBuild...(intBuild + intVersions) {
-            let currentUrl = URL(string: baseUrl + String(n) + "/Teams_osx.pkg")!
-            currentUrl.isReachable { success in
-                if success {
-                    versionArray.append(String(n))
-                    print("Version " + majorVersion + "." + String(n) + " exists!")
-                }
-            }
-            sema.wait()
-        }
-        if versionArray.count > 0 {
-            let downloadURL = URL(string: baseUrl + (versionArray.last!) + "/Teams_osx.pkg")!
-            FileDownloader.loadFileSync(url: downloadURL) { (path, error) in
-                print("Teams version " + majorVersion + "." + versionArray.last! + " was downloaded correctly!")
-            }
-        }
+var urlList: [URL] = []
+if let intBuild = intBuild, let intVersions = intVersions {
+    for n in intBuild...(intBuild + intVersions) {
+        versionsToCheck.append(String(n))
+        //urlList.append(URL(string: baseUrl + String(n) + "/Teams_osx.pkg")!)
     }
+    FileDownloader.checkVersionList(versionArray: versionsToCheck, majorVersion: majorVersion) { response in
+        existingVersions = response
+    }
+    
+}
+
+if existingVersions.count > 0 {
+    let downloadURL = URL(string: baseUrl + (existingVersions.last!) + "/Teams_osx.pkg")!
+    FileDownloader.loadFileSync(url: downloadURL) { (path, error) in
+        print("Teams version " + majorVersion + "." + existingVersions.last! + " was downloaded correctly!")
+        exit(EXIT_SUCCESS)
+    }
+}
 
 extension URL {
     func isReachable(completion: @escaping (Bool) -> ()) {
@@ -56,5 +58,4 @@ extension URL {
         }.resume()
     }
 }
-
 

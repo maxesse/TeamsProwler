@@ -32,4 +32,39 @@ class FileDownloader {
             completion(destinationUrl.path, error)
         }
     }
+
+    static func checkVersionList(versionArray: [String], majorVersion: String, completion: @escaping ([String]) -> Void) {
+        let urlDownloadQueue = DispatchQueue(label: "com.TeamsProwler.urlqueue")
+        let urlDownloadGroup = DispatchGroup()
+        var existingVersionsArray: [String] = []
+        versionArray.forEach { version in
+            let currentURL = URL(string: baseUrl + version + "/Teams_osx.pkg")!
+            urlDownloadGroup.enter()
+            var request = URLRequest(url: currentURL)
+            request.httpMethod = "HEAD"
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                print("Attempting network request1.4.00")
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode == 200 {
+                        existingVersionsArray.append(version)
+                        print("Version " + majorVersion + "." + version + " exists!")
+                    } else {
+                        print(error)
+                    }
+                }
+                urlDownloadQueue.async {
+                    urlDownloadGroup.leave()
+                }
+                return
+                                            
+            }
+            urlDownloadGroup.leave()
+        }
+        
+        urlDownloadGroup.notify(queue: DispatchQueue.global()) {
+            completion(existingVersionsArray)
+        }
+    }
+
+    
 }

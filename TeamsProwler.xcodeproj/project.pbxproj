@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		56232FCC2673695B005A7643 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56232FCB2673695B005A7643 /* Downloader.swift */; };
 		56BB1CEE2672521A00633436 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB1CED2672521A00633436 /* main.swift */; };
+		D8CBF6596DB66F3C42CEA1EA /* Pods_TeamsProwler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F5C882B255E62AEFED1239 /* Pods_TeamsProwler.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +25,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0AB483D2C60ADFB431784C1B /* Pods-TeamsProwler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamsProwler.debug.xcconfig"; path = "Target Support Files/Pods-TeamsProwler/Pods-TeamsProwler.debug.xcconfig"; sourceTree = "<group>"; };
 		56232FCB2673695B005A7643 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		56BB1CEA2672521A00633436 /* TeamsProwler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TeamsProwler; sourceTree = BUILT_PRODUCTS_DIR; };
 		56BB1CED2672521A00633436 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A8F5C882B255E62AEFED1239 /* Pods_TeamsProwler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamsProwler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFB95045B162EB6B86E74B93 /* Pods-TeamsProwler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamsProwler.release.xcconfig"; path = "Target Support Files/Pods-TeamsProwler/Pods-TeamsProwler.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,17 +38,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8CBF6596DB66F3C42CEA1EA /* Pods_TeamsProwler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		068AAC669AB5F2DD76F0FDC5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0AB483D2C60ADFB431784C1B /* Pods-TeamsProwler.debug.xcconfig */,
+				BFB95045B162EB6B86E74B93 /* Pods-TeamsProwler.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		56BB1CE12672521A00633436 = {
 			isa = PBXGroup;
 			children = (
 				56BB1CEC2672521A00633436 /* TeamsProwler */,
 				56BB1CEB2672521A00633436 /* Products */,
+				068AAC669AB5F2DD76F0FDC5 /* Pods */,
+				6A196AE81C0A66C60E665ED2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +81,14 @@
 			path = TeamsProwler;
 			sourceTree = "<group>";
 		};
+		6A196AE81C0A66C60E665ED2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A8F5C882B255E62AEFED1239 /* Pods_TeamsProwler.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -72,6 +96,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56BB1CF12672521A00633436 /* Build configuration list for PBXNativeTarget "TeamsProwler" */;
 			buildPhases = (
+				B08629CCF935F4DB4B495A8F /* [CP] Check Pods Manifest.lock */,
 				56BB1CE62672521A00633436 /* Sources */,
 				56BB1CE72672521A00633436 /* Frameworks */,
 				56BB1CE82672521A00633436 /* CopyFiles */,
@@ -116,6 +141,31 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B08629CCF935F4DB4B495A8F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TeamsProwler-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		56BB1CE62672521A00633436 /* Sources */ = {
@@ -247,7 +297,9 @@
 		};
 		56BB1CF22672521A00633436 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AB483D2C60ADFB431784C1B /* Pods-TeamsProwler.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4S5S82Y33Y;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -258,7 +310,9 @@
 		};
 		56BB1CF32672521A00633436 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFB95045B162EB6B86E74B93 /* Pods-TeamsProwler.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4S5S82Y33Y;
 				ENABLE_HARDENED_RUNTIME = YES;
