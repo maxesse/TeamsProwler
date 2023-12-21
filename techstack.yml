@@ -1,0 +1,29 @@
+repo_name: maxesse/TeamsProwler
+report_id: 2b97dc5a8e1e9ab1673f3f1dd63e9661
+version: 0.1
+repo_type: Public
+timestamp: '2023-12-21T15:53:16+00:00'
+requested_by: maxesse
+provider: github
+branch: main
+detected_tools_count: 2
+tools:
+- name: Swift
+  description: 'An innovative new programming language for Cocoa and Cocoa Touch. '
+  website_url: https://developer.apple.com/swift/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1009/tuHsaI2U.png
+  detection_source: Repo Metadata
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source: Repo Metadata
