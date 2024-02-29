@@ -2,14 +2,14 @@ repo_name: maxesse/TeamsProwler
 report_id: 2b97dc5a8e1e9ab1673f3f1dd63e9661
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-05T08:16:54+00:00'
+timestamp: '2024-02-29T19:10:15+00:00'
 requested_by: maxesse
 provider: github
 branch: main
 detected_tools_count: 2
 tools:
 - name: Swift
-  description: 'An innovative new programming language for Cocoa and Cocoa Touch. '
+  description: An innovative new programming language for Cocoa and Cocoa Touch.
   website_url: https://developer.apple.com/swift/
   license: Apache-2.0
   open_source: true
